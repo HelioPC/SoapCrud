@@ -16,17 +16,17 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class WebServiceConfiguration extends WsConfigurerAdapter {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Bean
-	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @Bean
+    ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
 		servlet.setApplicationContext(applicationContext);
 		servlet.setTransformWsdlLocations(true);
 		return new ServletRegistrationBean(servlet, "/allService/*");
 	}
-	
-	@Bean(name = "employees")
-	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema employeeSchema) {
+
+    @Bean(name = "employees")
+    DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema employeeSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("allServiceSoapHttp");
 		wsdl11Definition.setLocationUri("/allService");
@@ -34,11 +34,10 @@ public class WebServiceConfiguration extends WsConfigurerAdapter {
 		wsdl11Definition.setSchema(employeeSchema);
 		return wsdl11Definition;
 	}
-	
-	
-	
-	@Bean
-	public XsdSchema employeeSchema() {
+
+
+    @Bean
+    XsdSchema employeeSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("employee.xsd"));
 	}
 	
