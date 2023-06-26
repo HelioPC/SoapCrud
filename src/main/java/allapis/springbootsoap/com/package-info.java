@@ -5,5 +5,5 @@
 // Generated on: 2023.06.25 at 08:35:45 da tarde WAT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://com.springbootsoap.allapis", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://com.springbootsoap.allapis", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package allapis.springbootsoap.com;

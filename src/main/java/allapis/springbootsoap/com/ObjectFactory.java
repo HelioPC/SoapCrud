@@ -8,7 +8,7 @@
 
 package allapis.springbootsoap.com;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
