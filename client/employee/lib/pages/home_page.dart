@@ -1,3 +1,4 @@
+import 'package:employee/pages/form_page.dart';
 import 'package:employee/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,59 +31,79 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: const Text('Employee CRUD'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const FormPage()),
+              );
+            },
+            icon: const Icon(Icons.save),
+          )
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      hintText: 'Search employee by id',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+      body: RefreshIndicator.adaptive(
+        onRefresh: () async {
+          context.read<EmployeeProvider>().setEmployee(null);
+          _controller.clear();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: ListView(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: 'Search employee by id',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.number,
+                      onTapOutside: (event) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
                     ),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.number,
-                    onTapOutside: (event) {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    },
                   ),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                    onPressed: () {
-                      Provider.of<EmployeeProvider>(
-                        context,
-                        listen: false,
-                      ).getEmployeeById(int.parse(_controller.text));
-                    },
-                    child: const Text('Pesquisar')),
-              ],
-            ),
-            const SizedBox(height: 50),
-            employee != null
-                ? Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: Text(employee.name[0].toUpperCase()),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                      onPressed: () {
+                        employee == null
+                            ? context
+                                .read<EmployeeProvider>()
+                                .getEmployeeById(int.parse(_controller.text))
+                            : context
+                                .read<EmployeeProvider>()
+                                .setEmployee(null);
+                      },
+                      child: Text(employee != null ? 'Limpar' : 'Pesquisar')),
+                ],
+              ),
+              const SizedBox(height: 50),
+              employee != null
+                  ? Card(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          child: Text(employee.name[0].toUpperCase()),
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_circle_right),
+                        ),
+                        title: Text(employee.name),
+                        subtitle: Text(employee.address),
                       ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_circle_right),
-                      ),
-                      title: Text(employee.name),
-                      subtitle: Text(employee.address),
-                    ),
-                  )
-                : const SizedBox(),
-          ],
+                    )
+                  : const SizedBox(),
+            ],
+          ),
         ),
       ),
     );
