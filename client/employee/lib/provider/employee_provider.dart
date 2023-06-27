@@ -97,9 +97,44 @@ class EmployeeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateEmployee(Employee employee) async {
-    // TODO: Implement update employee
-    return Future.delayed(const Duration(seconds: 3));
+  Future<bool> updateEmployee(Employee employee) async {
+    String body = '''
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://com.springbootsoap.allapis">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:updateEmployeeRequest>
+         <com:employeeInfo>
+            <com:employeeId>${employee.id}</com:employeeId>
+            <com:name>${employee.name}</com:name>
+            <com:department>${employee.department}</com:department>
+            <com:phone>${employee.phone}</com:phone>
+            <com:address>${employee.address}</com:address>
+         </com:employeeInfo>
+      </com:updateEmployeeRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+''';
+
+    try {
+      var response = await http.post(
+        Uri.parse(SOAPBASEURL),
+        headers: {
+          'Content-Type': 'text/xml;charset=utf-8',
+          'SOAPACTION': '',
+        },
+        body: body,
+      );
+
+      if (response.statusCode < 300 && response.statusCode >= 200) {
+        setEmployee(null);
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
   }
 
   Future<void> deleteEmployee(Employee employee) async {
