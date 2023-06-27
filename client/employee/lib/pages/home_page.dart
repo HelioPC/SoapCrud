@@ -1,3 +1,4 @@
+import 'package:employee/pages/detail_page.dart';
 import 'package:employee/pages/form_page.dart';
 import 'package:employee/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,17 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _getEmployee() {
+    context
+        .read<EmployeeProvider>()
+        .getEmployeeById(int.parse(_controller.text));
+  }
+
+  void _reset() {
+    context.read<EmployeeProvider>().setEmployee(null);
+    _controller.clear();
   }
 
   @override
@@ -75,13 +87,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(width: 20),
                   ElevatedButton(
                       onPressed: () {
-                        employee == null
-                            ? context
-                                .read<EmployeeProvider>()
-                                .getEmployeeById(int.parse(_controller.text))
-                            : context
-                                .read<EmployeeProvider>()
-                                .setEmployee(null);
+                        employee == null ? _getEmployee() : _reset();
                       },
                       child: Text(employee != null ? 'Limpar' : 'Pesquisar')),
                 ],
@@ -94,7 +100,15 @@ class _HomePageState extends State<HomePage> {
                           child: Text(employee.name[0].toUpperCase()),
                         ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return DetailPage(employee: employee);
+                                },
+                              ),
+                            );
+                          },
                           icon: const Icon(Icons.arrow_circle_right),
                         ),
                         title: Text(employee.name),
