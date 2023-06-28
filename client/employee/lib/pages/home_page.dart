@@ -109,7 +109,32 @@ class _HomePageState extends State<HomePage> {
                           child: Text(employee.name[0].toUpperCase()),
                         ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var response = await context
+                                .read<EmployeeProvider>()
+                                .deleteEmployee(employee.id);
+
+                            if (response) {
+                              _reset();
+                            }
+
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    response
+                                        ? 'Successfully deleted'
+                                        : 'Fail to delete',
+                                  ),
+                                  duration: const Duration(seconds: 3),
+                                  action: SnackBarAction(
+                                    label: 'Dismiss',
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                           icon: const Icon(Icons.delete),
                         ),
                         title: Text(employee.name),
