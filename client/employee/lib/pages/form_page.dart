@@ -72,10 +72,10 @@ class _FormPageState extends State<FormPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(28.0),
-        child: Form(
-          key: _formKey,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(28.0),
           child: Column(
             children: [
               if (_isUpgradeMode)
@@ -289,7 +289,7 @@ class _FormPageState extends State<FormPage> {
                   ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

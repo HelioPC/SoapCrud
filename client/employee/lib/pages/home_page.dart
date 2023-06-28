@@ -96,23 +96,24 @@ class _HomePageState extends State<HomePage> {
               employee != null
                   ? Card(
                       child: ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return DetailPage(employee: employee);
+                              },
+                            ),
+                          );
+                        },
                         leading: CircleAvatar(
                           child: Text(employee.name[0].toUpperCase()),
                         ),
                         trailing: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DetailPage(employee: employee);
-                                },
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.arrow_circle_right),
+                          onPressed: () {},
+                          icon: const Icon(Icons.delete),
                         ),
                         title: Text(employee.name),
-                        subtitle: Text(employee.address),
+                        subtitle: Text(employee.phone),
                       ),
                     )
                   : const SizedBox(),
