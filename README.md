@@ -67,6 +67,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -167,7 +168,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <img src="./screenshots/detail.png" width=300 height=600 />
 <img src="./screenshots/terminal.png" width=600 height=600 />
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](#acknowledgments)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,7 +209,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [eliude_c](https://discord.com/) - My discord
+My Name - [eliude_c](https://discord.com/) - My discord
 
 Project Link: [https://github.com/HelioPC/SoapCrud](https://github.com/HelioPC/SoapCrud)
 
