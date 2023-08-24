@@ -84,6 +84,7 @@ class EmployeeProvider extends ChangeNotifier {
         },
         body: body,
       );
+      debugPrint(response.statusCode.toString());
 
       if (response.statusCode < 300 && response.statusCode >= 200) {
         setEmployee(null);
@@ -92,7 +93,7 @@ class EmployeeProvider extends ChangeNotifier {
 
       return false;
     } catch (e) {
-      log(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }

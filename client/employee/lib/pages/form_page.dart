@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:employee/model/employee.dart';
 import 'package:employee/provider/employee_provider.dart';
@@ -22,6 +22,8 @@ class _FormPageState extends State<FormPage> {
   void _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
+    debugPrint('Is valid: $isValid');
+
     if (!isValid) return;
 
     _formKey.currentState?.save();
@@ -29,28 +31,40 @@ class _FormPageState extends State<FormPage> {
     setState(() => _isLoading = true);
 
     final employee = Employee(
-      id: _isUpgradeMode ? _formData['id'] as int : Random().nextInt(1000) + 1,
+      id: _isUpgradeMode
+          ? _formData['id'] as int
+          : math.Random().nextInt(1000) + 1,
       name: _formData['name'] as String,
       phone: _formData['phone'].toString(),
       department: _formData['department'] as String,
       address: _formData['address'] as String,
     );
 
-    var response = _isUpgradeMode
-        ? await context.read<EmployeeProvider>().updateEmployee(employee)
-        : await context.read<EmployeeProvider>().addEmployee(employee);
-
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response ? 'Successfully submited' : 'Fail to submit'),
-          duration: const Duration(seconds: 3),
-          action: SnackBarAction(
-            label: 'Dismiss',
-            onPressed: () {},
+      var response = false;
+      if (_isUpgradeMode) {
+        response = await context.read<EmployeeProvider>().updateEmployee(
+              employee,
+            );
+      } else {
+        response = await context.read<EmployeeProvider>().addEmployee(
+              employee,
+            );
+      }
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                Text(response ? 'Successfully submited' : 'Fail to submit'),
+            duration: const Duration(seconds: 3),
+            action: SnackBarAction(
+              label: 'Dismiss',
+              onPressed: () {},
+            ),
           ),
-        ),
-      );
+        );
+      }
     }
 
     setState(() => _isLoading = false);
@@ -295,6 +309,7 @@ class _FormPageState extends State<FormPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      _formKey.currentState?.reset();
                       _formData.clear();
                     },
                     child: const Text('Cancel'),

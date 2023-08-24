@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-const SOAPBASEURL = 'http://localhost:2026/allService';
+const SOAPBASEURL = 'http://192.168.1.7:2026/allService';
 
 const SOAPADDRESS = 'ns2:address';
 const SOAPNAME = 'ns2:name';
