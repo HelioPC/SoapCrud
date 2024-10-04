@@ -1,0 +1,17 @@
+services:
+  dev-db:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=employee
+    ports:
+      - "9309:3306"
+    networks:
+      - network1
+
+networks:
+  network1:
+    name: myNetwork
+    driver: bridge
+    external: true
