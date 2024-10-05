@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:employee/model/employee.dart';
-import 'package:employee/provider/employee_provider.dart';
+import 'package:employee/domain/model/employee.dart';
+import 'package:employee/shared/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:employee/model/employee.dart';
+import 'package:employee/domain/model/employee.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:employee/pages/home_page.dart';
-import 'package:employee/provider/employee_provider.dart';
+import 'package:employee/presentation/pages/home/home_page.dart';
+import 'package:employee/shared/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:employee/constants/urls.dart';
-import 'package:employee/model/employee.dart';
+import 'package:employee/core/constants/urls.dart';
+import 'package:employee/domain/model/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart' as xml;

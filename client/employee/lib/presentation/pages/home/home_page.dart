@@ -1,6 +1,6 @@
-import 'package:employee/pages/detail_page.dart';
-import 'package:employee/pages/form_page.dart';
-import 'package:employee/provider/employee_provider.dart';
+import 'package:employee/presentation/pages/detail/detail_page.dart';
+import 'package:employee/presentation/pages/form/form_page.dart';
+import 'package:employee/shared/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
